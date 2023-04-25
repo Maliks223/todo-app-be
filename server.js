@@ -12,7 +12,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // todo Api
-app.use("/api/todo", require("./Routes/todoRoutes"));
+app.use("/api/todos", require("./Routes/todoRoutes"));
+
+// user Api
+app.use("/api/users", require("./Routes/userRoutes"));
 
 // Start the server
 app.listen(port, () => {

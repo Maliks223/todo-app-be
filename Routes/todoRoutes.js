@@ -6,9 +6,13 @@ const {
   toggleTodo,
   deleteTodo,
 } = require("../Controllers/todoController");
+const { authMiddleware } = require("../Middleware/authMiddleware");
 
-router.route("/").get(getTodos).post(addTodo);
+router.route("/").get(authMiddleware, getTodos).post(authMiddleware, addTodo);
 
-router.route("/:id").delete(deleteTodo).put(toggleTodo);
+router
+  .route("/:id")
+  .delete(authMiddleware, deleteTodo)
+  .put(authMiddleware, toggleTodo);
 
 module.exports = router;
