@@ -30,15 +30,13 @@ const toggleTodo = async (req, res) => {
     res.status(400).json({ message: "Todo not found!" });
   }
 
-  const user = await User.findById(req.user.id);
-
   // Check for user
-  if (!user) {
+  if (!req.user) {
     res.status(401).json({ message: "User not found" });
   }
 
   // Make sure the logged in user matches the todo user
-  if (todo.user.toString() !== user.id) {
+  if (todo.user.toString() !== req.user.id) {
     res.status(401).json({ message: "User not authorized" });
   }
 
@@ -56,15 +54,13 @@ const deleteTodo = async (req, res) => {
     res.status(400).json({ message: "Todo not found, cannot be deleted!" });
   }
 
-  const user = await User.findById(req.user.id);
-
   // Check for user
-  if (!user) {
+  if (!req.user) {
     res.status(401).json({ message: "User not found" });
   }
 
   // Make sure the logged in user matches the todo user
-  if (todo.user.toString() !== user.id) {
+  if (todo.user.toString() !== req.user.id) {
     res.status(401).json({ message: "User not authorized" });
   }
 

@@ -69,15 +69,9 @@ const loginUser = async (req, res) => {
   }
 };
 
-// User logout
 // Route Get /api/users/me
 const getMe = async (req, res) => {
-  const { _id, email } = await User.findById(req.user.id);
-
-  res.status(200).json({
-    id: _id,
-    email,
-  });
+  res.status(200).json(req.user);
 };
 
 // Generate JWT
